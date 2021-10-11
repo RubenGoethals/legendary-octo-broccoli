@@ -8,9 +8,12 @@ app.use(express.json());
 
 app.post("/compute", (request, response) => {
   const game = request.body.game;
-  // TODO: Validate input
-
+  if (!request.is('application/json')) {
+    // Send error here
+    response.send(400);
+  } 
+  //console.log(game);
   const score = compute(game);
 
-  // TODO: Return response
+  return response.send({ score});
 });
